@@ -4,7 +4,7 @@
 // 	protoc        v3.13.0
 // source: user.proto
 
-package user
+package go_micro_service_admin
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

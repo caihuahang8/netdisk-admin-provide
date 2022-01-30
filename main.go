@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/caihuahang8/admin/domain/repository"
 	"github.com/caihuahang8/common"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/repository"
 	"github.com/jinzhu/gorm"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
