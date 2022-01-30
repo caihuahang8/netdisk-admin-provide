@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package go.micro.service.user;
+option go_package  = "./user";
+
+
+service User {
+  rpc AddUser(UserAdd) returns (Response) {}
+}
+
+
+message UserAdd {
+  string username=1;
+  string password=2;
+}
+
+
+message UserUpdate{
+  int64 user_id=1;
+  string username=2;
+  string password=3;
+}
+
+message UserQuery {
+  int64 user_id=1;
+  string username = 2;
+}
+
+message UserVo {
+  int64 user_id=1;
+  string username=2;
+}
+
+message Response {
+  string message=1;
+  repeated UserVo user_vo=2;
+}
+
+
+
