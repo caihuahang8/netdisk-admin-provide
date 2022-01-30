@@ -1,4 +1,4 @@
-module github.com/caihuahang8/admin
+module github.com/caihuahang8/netdisk-admin-provide
 
 go 1.13
 
