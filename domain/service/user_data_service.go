@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/caihuahang8/admin/domain/model"
-	"github.com/caihuahang8/admin/domain/repository"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/model"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/repository"
 )
 
 type IUserDateService interface {

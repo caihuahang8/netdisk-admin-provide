@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package go.micro.service.user;
-option go_package  = "./user";
+package go.micro.service.admin;
+option go_package  = "./admin";
 
 
 service User {

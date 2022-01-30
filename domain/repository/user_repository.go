@@ -2,7 +2,7 @@ package repository
 
 import (
 	"errors"
-	"github.com/caihuahang8/admin/domain/model"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/model"
 	"github.com/jinzhu/gorm"
 )
 

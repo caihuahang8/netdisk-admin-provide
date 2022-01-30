@@ -2,10 +2,10 @@ package handler
 
 import (
 	"context"
-	"github.com/caihuahang8/admin/domain/model"
-	"github.com/caihuahang8/admin/domain/service"
-	"github.com/caihuahang8/admin/proto/user"
 	"github.com/caihuahang8/common"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/model"
+	"github.com/caihuahang8/netdisk-admin-provide/domain/service"
+	user "github.com/caihuahang8/netdisk-admin-provide/proto/admin"
 )
 
 type Service struct {
