@@ -18,3 +18,10 @@ func (u *Service) AddUser(ctx context.Context, request *user.UserAdd, response *
 	_, err = u.UserDataService.AddUserData(user)
 	return err
 }
+
+func (u *Service) Login(ctx context.Context, request *user.LoginRquest, response *user.Response) (err error) {
+	user := &model.User{}
+	err = common.SwapTo(user, request)
+	_, err = u.UserDataService.AddUserData(user)
+	return err
+}

@@ -43,6 +43,7 @@ func NewUserEndpoints() []*api.Endpoint {
 
 type UserService interface {
 	AddUser(ctx context.Context, in *UserAdd, opts ...client.CallOption) (*Response, error)
+	Login(ctx context.Context, in *LoginRquest, opts ...client.CallOption) (*Response, error)
 }
 
 type userService struct {
@@ -67,15 +68,27 @@ func (c *userService) AddUser(ctx context.Context, in *UserAdd, opts ...client.C
 	return out, nil
 }
 
+func (c *userService) Login(ctx context.Context, in *LoginRquest, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "User.Login", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for User service
 
 type UserHandler interface {
 	AddUser(context.Context, *UserAdd, *Response) error
+	Login(context.Context, *LoginRquest, *Response) error
 }
 
 func RegisterUserHandler(s server.Server, hdlr UserHandler, opts ...server.HandlerOption) error {
 	type user interface {
 		AddUser(ctx context.Context, in *UserAdd, out *Response) error
+		Login(ctx context.Context, in *LoginRquest, out *Response) error
 	}
 	type User struct {
 		user
@@ -90,4 +103,8 @@ type userHandler struct {
 
 func (h *userHandler) AddUser(ctx context.Context, in *UserAdd, out *Response) error {
 	return h.UserHandler.AddUser(ctx, in, out)
+}
+
+func (h *userHandler) Login(ctx context.Context, in *LoginRquest, out *Response) error {
+	return h.UserHandler.Login(ctx, in, out)
 }

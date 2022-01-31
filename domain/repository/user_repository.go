@@ -9,10 +9,12 @@ import (
 type IUserRepository interface {
 	AddUser(user *model.User) (int64, error)
 	InitTable() error
+	//根据用户名称查找用户信息
+	FindUserByName(string) (*model.User, error)
 }
 
 //初始化
-func NewCartRepository(db *gorm.DB) IUserRepository {
+func NewUserRepository(db *gorm.DB) IUserRepository {
 	return &UserRepository{mysqlDb: db}
 }
 
@@ -29,6 +31,12 @@ func (u *UserRepository) AddUser(user *model.User) (int64, error) {
 		return 0, errors.New("添加用户失败")
 	}
 	return user.ID, nil
+}
+
+//根据用户名称查找用户信息
+func (u *UserRepository) FindUserByName(name string) (user *model.User, err error) {
+	user = &model.User{}
+	return user, u.mysqlDb.Where("username = ?", name).Find(user).Error
 }
 
 //初始化数据库表

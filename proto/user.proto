@@ -6,8 +6,13 @@ option go_package  = "./admin";
 
 service User {
   rpc AddUser(UserAdd) returns (Response) {}
+  rpc Login(LoginRquest) returns (Response) {}
 }
 
+message LoginRquest{
+  string username=1;
+  string password=2;
+}
 
 message UserAdd {
   string username=1;

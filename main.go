@@ -4,11 +4,11 @@ import (
 	"github.com/caihuahang8/common"
 	"github.com/caihuahang8/netdisk-admin-provide/domain/repository"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/micro/go-micro/v2"
 	log "github.com/micro/go-micro/v2/logger"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/registry/etcd"
-	"github.com/opentracing/opentracing-go"
 )
 
 var QPS = 100
@@ -21,19 +21,14 @@ func main() {
 	}
 	//注册中心
 	reg := etcd.NewRegistry(registry.Addrs("127.0.0.1:2379"))
-	//consul := consul2.NewRegistry(func(options *registry.Options) {
-	//	options.Addrs = []string{
-	//		"127.0.0.1:8500",
-	//	}
-	//})
 
-	//链路追踪
-	t, io, err := common.NewTracer("go.micro.service.cart", "localhost:6831")
-	if err != nil {
-		log.Error(err)
-	}
-	defer io.Close()
-	opentracing.SetGlobalTracer(t)
+	////链路追踪
+	//t, io, err := common.NewTracer("go.micro.service.admin", "localhost:6831")
+	//if err != nil {
+	//	log.Error(err)
+	//}
+	//defer io.Close()
+	//opentracing.SetGlobalTracer(t)
 
 	//数据库连接
 	mysqlInfo := common.GetMysqlFromConsul(consulConfig, "mysql")
@@ -47,14 +42,14 @@ func main() {
 	db.SingularTable(true)
 
 	//第一次初始化
-	err = repository.NewCartRepository(db).InitTable()
+	err = repository.NewUserRepository(db).InitTable()
 	if err != nil {
 		log.Error(err)
 	}
 
 	// New Service
 	service := micro.NewService(
-		micro.Name("go.micro.service.cart"),
+		micro.Name("go.micro.service.admin"),
 		micro.Version("latest"),
 		//暴露的服务地址
 		micro.Address("0.0.0.0:8087"),
